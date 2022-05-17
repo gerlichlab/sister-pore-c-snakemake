@@ -24,7 +24,6 @@ configfile: BASE_DIR / "config/config.yaml"
 ##### load rules #####
 include: "rules/common.smk"  # python helper functions
 
-
 basecall_df, reference_df, mapping_df = create_config_dataframes()
 paths = create_path_accessor()
 
