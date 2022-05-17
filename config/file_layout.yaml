@@ -64,3 +64,5 @@ methylation:
 binaries:
     f5c_cpu: "f5c_x86_64_linux"
     f5c_gpu: "f5c_x86_64_linux_cuda"
+qc:
+    pore_c: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.pore_c.qc.pdf'
