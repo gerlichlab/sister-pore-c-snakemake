@@ -1,0 +1,18 @@
+# cluster_config.yml - cluster configuration
+__default__:
+    time: 02:00:00 # time limit for each job
+    nodes: 4
+    ntasks-per-node: 1 #Request n cores be allocated per node.
+    memory: 25G
+    chdir: /groups/gerlich/experiments/Experiments_005400/005436/analysis/Pore-C-Snakemake/
+    output: /groups/gerlich/experiments/Experiments_005400/005436/clusterlogsnakemake_job-%j.out
+    error: /groups/gerlich/experiments/Experiments_005400/005436/clusterlogsnakemake_job-%j.err
+
+align_bwa:
+    time: 04:00:00 # time limit for each job
+    nodes: 8
+    ntasks-per-node: 1 #Request n cores be allocated per node.
+    memory: 50G
+    chdir: /groups/gerlich/experiments/Experiments_005400/005436/analysis/Pore-C-Snakemake/
+    output: /groups/gerlich/experiments/Experiments_005400/005436/clusterlogsnakemake_job-%j.out
+    error: /groups/gerlich/experiments/Experiments_005400/005436/clusterlogsnakemake_job-%j.err
