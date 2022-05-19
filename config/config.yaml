@@ -5,7 +5,7 @@ references: "config/references.tsv"
 phased_vcfs: "config/phased_vcfs.tsv"
 file_layout: "config/file_layout.yaml"
 
-output_dir: "results"
+output_dir: "/groups/gerlich/experiments/Experiments_005400/005484/sequencing_results"
 
 # a run will be split into batches of this size at the start of a pipeline in order
 # to permit parallel execution. Warning - if this is set too low then snakemake can

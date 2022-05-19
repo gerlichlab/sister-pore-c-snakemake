@@ -1,0 +1,12 @@
+channels:
+- conda-forge
+- bioconda
+- defaults
+dependencies:
+- pore-c==0.4.0
+- python==3.8
+- aws-sdk-cpp==1.8.186
+- pandas
+- matplotlib
+- seaborn 
+

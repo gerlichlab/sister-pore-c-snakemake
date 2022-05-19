@@ -27,12 +27,12 @@ include: "rules/common.smk"  # python helper functions
 basecall_df, reference_df, mapping_df = create_config_dataframes()
 paths = create_path_accessor()
 
-
 include: "rules/refgenome.smk"  # prepare the reference genome
 include: "rules/reads.smk"  # import fastqs, fast5s, sequencing summary
 include: "rules/mapping.smk"  # map and process resulting alignments
 include: "rules/exports.smk"  # export to alternative formats
 include: "rules/methylation.smk"  # use f5c to call cpg methylation
+include: "rules/qc_porec.smk" # qc stuff
 
 
 ##### output paths #####
@@ -43,6 +43,11 @@ rule all:
         basecalls=expand_rows(paths.basecall.catalog, basecall_df),
         refgenome=expand_rows(paths.refgenome.bwt, reference_df),
         contacts=expand_rows(paths.merged_contacts.concatemers, mapping_df),
+
+rule qc:
+    input:
+        qc=expand_rows(paths.qc.pore_c, mapping_df)
+
 
 
 rule cooler:
