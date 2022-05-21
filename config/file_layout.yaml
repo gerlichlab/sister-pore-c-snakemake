@@ -25,6 +25,8 @@ basecall:
     f5c_index_all: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.f5c_index_complete'
 mapping:
     coord_sorted_bam: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.bam'
+    coord_sorted_bam_wo_index: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.wo_index.bam'
+    coord_sorted_bai_wo_index: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.wo_index.bam.bai'
     coord_sorted_bai: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}.coord_sort.bam.bai'
     haplotagged_aligns: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.haplotagged.txt'
     filtered_bam: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.filtered.bam'
@@ -69,3 +71,4 @@ qc:
 brdu_calling:
     index: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.dnascent.index'
     detect: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.detect'
+    label_library: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}_label_library.pkl'

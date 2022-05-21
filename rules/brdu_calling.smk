@@ -14,7 +14,16 @@ rule call_brdu:
         paths.brdu_calling.detect
     input:
         index=paths.brdu_calling.index,
-        mapping=paths.mapping.coord_sorted_bam,
+        mapping=paths.mapping.coord_sorted_bam_wo_index,
         refgenome=paths.refgenome.fasta
+    threads: 20
     shell:
-        "/dnascent/DNAscent/bin/DNAscent detect -b {input.mapping} -r {input.refgenome} -i {input.index} -o {output} -q 30 -l 500"
+        "/dnascent/DNAscent/bin/DNAscent detect -b {input.mapping} -r {input.refgenome} -i {input.index} -o {output} -q 30 -l 500 -t {threads}"
+
+rule make_label_library:
+    input:
+        expand_basecall_batches(paths.brdu_calling.detect)
+    output:
+        paths.brdu_calling.label_library
+    run:
+        "python bin/make_label_library --input {input} --output {output}"

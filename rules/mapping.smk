@@ -90,6 +90,17 @@ rule assign_fragments:
         "alignments assign-fragments {input.align_table} {input.fragments_table} {output} 2>{log}"
 
 
+rule remove_index_from_readname:
+    output:
+        bam=paths.mapping.coord_sorted_bam_wo_index,
+        index=paths.mapping.coord_sorted_bai_wo_index
+    input:
+        mapping=paths.mapping.coord_sorted_bam
+    conda:
+        PORE_C_CONDA_FILE
+    shell:
+        "python scratch/remove_idx_from_read_name.py -i {input.mapping} > {output.bam}; samtools index {output.bam}"
+
 rule to_contacts:
     input:
         align_table=paths.align_table.pore_c,
