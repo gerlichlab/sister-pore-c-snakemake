@@ -33,10 +33,9 @@ include: "rules/mapping.smk"  # map and process resulting alignments
 include: "rules/exports.smk"  # export to alternative formats
 include: "rules/methylation.smk"  # use f5c to call cpg methylation
 include: "rules/qc_porec.smk" # qc stuff
-
+include: "rules/brdu_calling.smk"
 
 ##### output paths #####
-
 
 rule all:
     input:
@@ -48,6 +47,13 @@ rule qc:
     input:
         qc=expand_rows(paths.qc.pore_c, mapping_df)
 
+rule brdu_index:
+    input:
+        indices=expand_rows(paths.brdu_calling.index, mapping_df)
+
+rule detect_brdu:
+    input:
+        test_detect=expand(paths.brdu_calling.detect, batch_id=['batch1'], enzyme="DpnII", run_id="run01", refgenome_id="hg19", phase_set_id="unphased")
 
 
 rule cooler:

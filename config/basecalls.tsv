@@ -5,4 +5,4 @@
 # biospecimen: An id for the sample (required if using the haplotype-aware version of the pipeline).
 # fastq_path: Path to a fastq file containing the reads for this run. If a relative path is given then it is relative to the snakemake workdir
 run_id	enzyme	refgenome_ids	biospecimen	fastq_path	fast5_directory	sequencing_summary_path
-run01	DpnII	hg19		/groups/gerlich/experiments/Experiments_005400/005484/sequencing_data/20220509_1345_MN36858_FAS49033_aaaf35b7/basecalls/202205120/FAS49033_1_202205120.fastq.gz		
+run01	DpnII	hg19		/groups/gerlich/experiments/Experiments_005400/005484/sequencing_data/20220509_1345_MN36858_FAS49033_aaaf35b7/basecalls/202205120/FAS49033_1_202205120.fastq.gz	/groups/gerlich/experiments/Experiments_005400/005484/sequencing_data/20220509_1345_MN36858_FAS49033_aaaf35b7/fast5	/groups/gerlich/experiments/Experiments_005400/005484/sequencing_data/20220509_1345_MN36858_FAS49033_aaaf35b7/basecalls/202205120/sequencing_summary.txt
