@@ -47,6 +47,10 @@ rule qc:
     input:
         qc=expand_rows(paths.qc.pore_c, mapping_df)
 
+rule make_library:
+    input:
+        library=expand_rows(paths.brdu_calling.label_library, mapping_df)
+
 rule brdu_index:
     input:
         indices=expand_rows(paths.brdu_calling.index, mapping_df)
