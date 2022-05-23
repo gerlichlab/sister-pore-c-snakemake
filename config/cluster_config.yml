@@ -24,3 +24,12 @@ call_brdu:
     memory: 15G
     output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
     error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
+
+assign_pairs:
+    time: 00:30:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 35G
+    output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
+    error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
+

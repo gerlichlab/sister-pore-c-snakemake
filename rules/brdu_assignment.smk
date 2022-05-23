@@ -19,5 +19,5 @@ rule assign_pairs:
     conda:
         "../envs/assign_pairs.yml"
     shell:
-        "python bin/assign_brdu_pairs.py --pairs {input.pairs} --label_lib {input.label_library} --output {output}"
+        "python bin/assign_brdu_pairs.py --pairs {input.pairs} --contacts {input.contacts} --label_lib {input.label_library} --output {output}"
     
