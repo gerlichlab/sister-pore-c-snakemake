@@ -34,6 +34,7 @@ include: "rules/exports.smk"  # export to alternative formats
 include: "rules/methylation.smk"  # use f5c to call cpg methylation
 include: "rules/qc_porec.smk" # qc stuff
 include: "rules/brdu_calling.smk"
+include: "rules/brdu_assignment.smk"
 
 ##### output paths #####
 
@@ -46,6 +47,10 @@ rule all:
 rule qc:
     input:
         qc=expand_rows(paths.qc.pore_c, mapping_df)
+
+rule assign_brdu:
+    input:
+        assigned_pairs=expand_rows(paths.brdu_calling.assigned_pairs, mapping_df)
 
 rule make_library:
     input:

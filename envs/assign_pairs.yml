@@ -1,0 +1,8 @@
+name: assign_pairs
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - pandas
+  - pyarrow
+  - pairtools==0.3.0

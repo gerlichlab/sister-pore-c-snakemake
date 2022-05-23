@@ -72,3 +72,4 @@ brdu_calling:
     index: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.dnascent.index'
     detect: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.detect'
     label_library: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}_label_library.pkl'
+    assigned_pairs: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.brdu_assigned.sorted.pairs.gz'

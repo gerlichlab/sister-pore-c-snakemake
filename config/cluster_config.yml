@@ -18,9 +18,9 @@ align_bwa:
     error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
 
 call_brdu:
-    time: 01:00:00
+    time: 02:30:00
     nodes: 20
     ntasks-per-node: 1
-    memory: 10G
+    memory: 15G
     output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
     error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err

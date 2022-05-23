@@ -13,7 +13,7 @@ class BrdURead():
     def add_thymidine(self, position_on_ref, probability):
         self._thymidines.append({"chrom": self._chrom,"pos": position_on_ref, "prob_brdu": probability})
     def get_id(self):
-        return f"{self._read_id}_{self._chrom}_{self._ref_start}_{self._ref_end})"
+        return f"{self._read_id}_{self._chrom}_{self._ref_start}_{self._ref_end}"
     def get_length(self):
         return abs(self._ref_end - self._ref_start)
     def get_thymidines(self):
@@ -74,21 +74,30 @@ def build_alignment_index(detect_path, prob_cutoff=0.8, brdu_cutoff=0.1, limit=N
 # parse arguments
 
 parser = argparse.ArgumentParser(description='Create label library containing mapping between read_id and labeling state')
-parser.add_argument('--input')
+parser.add_argument('--input', nargs="+")
 parser.add_argument('--prob_cutoff', default=0.8)
 parser.add_argument('--brdu_cutoff', default=0.1)
 parser.add_argument('--output')
 args = parser.parse_args()
 
+
+# clean arguments
+
+input_files = [i.rstrip(",") for i in args.input]
+
 # iterate through input and generate index
 
 output_index = dict()
 
-for input_detect in args.input:
+for input_detect in input_files:
     temp_index = build_alignment_index(input_detect, args.prob_cutoff, args.brdu_cutoff)
     output_index.update(temp_index)
+
+print(f"Finished building index with {len(output_index)} keys.")
 
 # write output
 
 with open(args.output, 'wb') as handle:
     pickle.dump(output_index, handle)
+
+print("Finished writing index.")
