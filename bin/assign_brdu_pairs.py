@@ -75,6 +75,6 @@ out_stream = pairtools._fileio.auto_open(args.output, nproc=3, mode="w")
 
 out_stream.writelines([line + "\n" for line in header])
 
-pair_frame_clean.to_csv(out_stream, sep="\t", columns=new_cols, header=False, index=False)
+pair_frame_clean.to_csv(out_stream, sep="\t", columns=list(pair_frame_clean.columns), header=False, index=False)
 
 
