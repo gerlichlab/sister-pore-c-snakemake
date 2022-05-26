@@ -57,7 +57,7 @@ contacts.loc[:, "align2_pos"] = (contacts.align2_start + contacts.align2_end)//2
 contacts.loc[:, "align1_size"] = contacts.align1_end - contacts.align1_start
 contacts.loc[:, "align2_size"] = contacts.align2_end - contacts.align2_start
 
-pair_frame = contacts[["read_name", "align1_chrom", "align1_pos", "align2_chrom", "align2_pos", "align1_strand", "align2_strand", "align1_align_score", "align2_align_score", "align1_size", "align2_size"]]
+pair_frame = contacts[["read_name", "align1_chrom", "align1_pos", "align2_chrom", "align2_pos", "align1_strand", "align2_strand", "align1_align_score", "align2_align_score", "align1_size", "align2_size", "contact_is_direct", "align1_align_base_qscore", "align2_align_base_qscore"]]
 pair_frame.loc[:, "label_1"] = result["label_1"]
 pair_frame.loc[:, "label_2"] = result["label_2"]
 
