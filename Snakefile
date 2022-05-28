@@ -35,6 +35,7 @@ include: "rules/methylation.smk"  # use f5c to call cpg methylation
 include: "rules/qc_porec.smk" # qc stuff
 include: "rules/brdu_calling.smk"
 include: "rules/brdu_assignment.smk"
+include: "rules/generate_coolers_sister_specific.smk"
 
 ##### output paths #####
 
@@ -48,9 +49,17 @@ rule qc:
     input:
         qc=expand_rows(paths.qc.pore_c, mapping_df)
 
+rule create_mcoolers_label_specific:
+    input:
+        mcoolers=expand_rows_w_label_types(paths.matrix.mcool_label_split, mapping_df)
+
 rule assign_brdu:
     input:
-        assigned_pairs=expand_rows(paths.brdu_calling.assigned_pairs, mapping_df)
+        assigned_pairs=expand_rows(paths.pairs.assigned_pairs, mapping_df)
+
+rule split_assigned_pairs:
+    input:
+        split_pairs=expand_rows_w_label_types(paths.pairs.label_split, mapping_df)
 
 rule make_library:
     input:
@@ -59,10 +68,6 @@ rule make_library:
 rule brdu_index:
     input:
         indices=expand_rows(paths.brdu_calling.index, mapping_df)
-
-rule detect_brdu:
-    input:
-        test_detect=expand(paths.brdu_calling.detect, batch_id=['batch1'], enzyme="DpnII", run_id="run01", refgenome_id="hg19", phase_set_id="unphased")
 
 
 rule cooler:
