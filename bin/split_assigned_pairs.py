@@ -34,7 +34,7 @@ cis_pairs = labelled_pairs.loc[(labelled_pairs.strand1 == labelled_pairs.strand2
 
 write_pairs(header, labelled_pairs, base_name + "labelled_only.cis_and_trans.pairs.gz")
 write_pairs(header, cis_pairs, base_name + "labelled_only.cis.pairs.gz")
-write_pairs(header, cis_pairs, base_name + "labelled_only.trans.pairs.gz")
+write_pairs(header, trans_pairs, base_name + "labelled_only.trans.pairs.gz")
 
 # generate all output
 
