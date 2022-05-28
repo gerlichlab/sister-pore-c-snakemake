@@ -49,6 +49,10 @@ rule qc:
     input:
         qc=expand_rows(paths.qc.pore_c, mapping_df)
 
+rule create_mcoolers_weight_transferred:
+    input:
+        mcoolers_weight_transferred=expand_rows_w_label_types(paths.matrix.mcool_split_weights_transfered, mapping_df)
+
 rule create_mcoolers_label_specific:
     input:
         mcoolers=expand_rows_w_label_types(paths.matrix.mcool_label_split, mapping_df)
