@@ -84,6 +84,13 @@ def expand_rows(path: str, df: pd.DataFrame):
     res = df.apply(lambda x: path.format(**x.to_dict()), axis=1)
     return list(res)
 
+def expand_rows_w_label_types(path: str, df: pd.DataFrame):
+    expanded = expand(path, label_type=["labelled_only", "all_reads"], contact_type=["cis", "trans", "cis_and_trans"], allow_missing=True)
+    output = []
+    for i in expanded:
+        output.extend(expand_rows(i, df))
+    return output
+
 
 def lookup_value(column, df):
     """Use wildcards to 'lookup' a value in a dataframe. The wildcard keys must

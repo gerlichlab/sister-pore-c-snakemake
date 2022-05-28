@@ -15,9 +15,19 @@ rule assign_pairs:
         pairs=paths.pairs.pairs,
         label_library=paths.brdu_calling.label_library
     output:
-        paths.brdu_calling.assigned_pairs
+        paths.pairs.assigned_pairs
     conda:
         "../envs/assign_pairs.yml"
     shell:
         "python bin/assign_brdu_pairs.py --pairs {input.pairs} --contacts {input.contacts} --label_lib {input.label_library} --output {output}"
+
+rule split_pairs:
+    input:
+        paths.pairs.assigned_pairs
+    output:
+        expand(paths.pairs.label_split, label_type=["labelled_only", "all_reads"], contact_type=["cis", "trans", "cis_and_trans"], allow_missing=True)
+    conda:
+        "../envs/assign_pairs.yml"
+    shell:
+        "python bin/split_assigned_pairs.py --pairs {input}"
     

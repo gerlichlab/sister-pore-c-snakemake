@@ -6,6 +6,7 @@ phased_vcfs: "config/phased_vcfs.tsv"
 file_layout: "config/file_layout.yaml"
 
 output_dir: "/groups/gerlich/experiments/Experiments_005400/005484/sequencing_results"
+chrom_sizes: "assets/hg19.chrom.sizes"
 
 # a run will be split into batches of this size at the start of a pipeline in order
 # to permit parallel execution. Warning - if this is set too low then snakemake can
@@ -17,19 +18,13 @@ max_read_length: 100000
 matrix_resolutions:
   base: 1000
   zoomify:
-    - 1000
-    - 2000
     - 5000
     - 10000
-    - 25000
+    - 20000
     - 50000
     - 100000
-    - 250000
-    - 500000
     - 1000000
-    - 2500000
     - 5000000
-    - 10000000
 software:
   juicer:
     tools_url: "https://s3.amazonaws.com/hicfiles.tc4ga.com/public/juicer/juicer_tools_1.19.02.jar"

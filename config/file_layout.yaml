@@ -33,11 +33,16 @@ mapping:
     filtered_bai: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.filtered.bam.bai'
 matrix:
     cool: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.matrix.cool'
+    cool_label_split: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.{label_type}.{contact_type}.cool'
+    mcool_label_split: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.{label_type}.{contact_type}.mcool'
+    mcool_split_weights_transfered: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.{label_type}.{contact_type}.shared_weights.mcool'
     haplotyped_cools: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.matrix.haplotyped.cools.done'
     mcool: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.matrix.mcool'
 pairs:
     unsorted_pairs: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.unsorted.pairs'
     pairs: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.sorted.pairs.gz'
+    assigned_pairs: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.brdu_assigned.pairs.gz'
+    label_split: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.{label_type}.{contact_type}.pairs.gz'
     index: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.sorted.pairs.gz.px2'
 refgenome:
     catalog: '{refgenome_id}.rg.catalog.yaml'
