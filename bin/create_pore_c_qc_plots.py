@@ -103,6 +103,8 @@ def plot_contact_type(summary_table, ax):
     # plot
     sbn.barplot(x="level_2", y="value", data=contact_table.query("level_0 == 'total' and level_1 == 'perc'"), ax=ax, color="tab:blue")
     ax.set(xlabel="Read-type", ylabel="Total contacts [%]")
+    plt.sca(ax)
+    plt.xticks(*plt.xticks(), rotation=90)
 
 def plot_qc_report(contact_frame, summary_table):
     fig = plt.figure(constrained_layout=True)

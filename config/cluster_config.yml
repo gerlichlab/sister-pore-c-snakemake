@@ -12,7 +12,7 @@ align_bwa:
     time: 04:00:00
     nodes: 8
     ntasks-per-node: 1
-    memory: 50G
+    memory: 55G
     chdir: /groups/gerlich/experiments/Experiments_005400/005484/sequencing_analysis/sister-pore-c-snakemake
     output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
     error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err

@@ -73,7 +73,6 @@ rule brdu_index:
     input:
         indices=expand_rows(paths.brdu_calling.index, mapping_df)
 
-
 rule cooler:
     input:
         expand_rows(paths.matrix.mcool, mapping_df),
