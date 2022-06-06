@@ -36,47 +36,28 @@ include: "rules/qc_porec.smk" # qc stuff
 include: "rules/brdu_calling.smk"
 include: "rules/brdu_assignment.smk"
 include: "rules/generate_coolers_sister_specific.smk"
+include: "rules/qc_sister_porec.smk"
 
 ##### output paths #####
+
 
 rule all:
     input:
         basecalls=expand_rows(paths.basecall.catalog, basecall_df),
         refgenome=expand_rows(paths.refgenome.bwt, reference_df),
         contacts=expand_rows(paths.merged_contacts.concatemers, mapping_df),
+        mcoolers_weight_transferred=expand_rows_w_label_types(paths.matrix.mcool_split_weights_transfered, mapping_df)
+        qc=expand_rows(paths.qc.pore_c, mapping_df)
+        qc_sister=paths.qc.sister_pore_c
 
 rule qc:
     input:
         qc=expand_rows(paths.qc.pore_c, mapping_df)
+        qc_sister=paths.qc.sister_pore_c
 
 rule create_mcoolers_weight_transferred:
     input:
         mcoolers_weight_transferred=expand_rows_w_label_types(paths.matrix.mcool_split_weights_transfered, mapping_df)
-
-rule create_mcoolers_label_specific:
-    input:
-        mcoolers=expand_rows_w_label_types(paths.matrix.mcool_label_split, mapping_df)
-
-rule assign_brdu:
-    input:
-        assigned_pairs=expand_rows(paths.pairs.assigned_pairs, mapping_df)
-
-rule split_assigned_pairs:
-    input:
-        split_pairs=expand_rows_w_label_types(paths.pairs.label_split, mapping_df)
-
-rule make_library:
-    input:
-        library=expand_rows(paths.brdu_calling.label_library, mapping_df)
-
-rule brdu_index:
-    input:
-        indices=expand_rows(paths.brdu_calling.index, mapping_df)
-
-rule cooler:
-    input:
-        expand_rows(paths.matrix.mcool, mapping_df),
-
 
 rule pairs:
     input:

@@ -1,4 +1,5 @@
 from box import Box
+import glob
 
 ACTIVATE_POREC = "set +u; source ~/miniconda2/etc/profile.d/conda.sh ; conda activate ; conda activate poreC; "
 
@@ -84,13 +85,20 @@ def expand_rows(path: str, df: pd.DataFrame):
     res = df.apply(lambda x: path.format(**x.to_dict()), axis=1)
     return list(res)
 
-def expand_rows_w_label_types(path: str, df: pd.DataFrame):
-    expanded = expand(path, label_type=["labelled_only", "all_reads"], contact_type=["cis", "trans", "cis_and_trans"], allow_missing=True)
+def expand_rows_w_label_types(path: str, df: pd.DataFrame, label_type=None, contact_type=None):
+    if label_type is None:
+        label_type = ["labelled_only", "all_reads"]
+    if contact_type is None:
+        contact_type = ["cis", "trans", "cis_and_trans"]
+    expanded = expand(path, label_type=label_type, contact_type=contact_type, allow_missing=True)
     output = []
     for i in expanded:
         output.extend(expand_rows(i, df))
     return output
 
+def get_all_detect_files(paths):
+    directory = Path(paths.brdu_calling.detect).parent
+    return glob.glob(str(directory / '*.detect'))
 
 def lookup_value(column, df):
     """Use wildcards to 'lookup' a value in a dataframe. The wildcard keys must
