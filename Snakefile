@@ -46,13 +46,13 @@ rule all:
         basecalls=expand_rows(paths.basecall.catalog, basecall_df),
         refgenome=expand_rows(paths.refgenome.bwt, reference_df),
         contacts=expand_rows(paths.merged_contacts.concatemers, mapping_df),
-        mcoolers_weight_transferred=expand_rows_w_label_types(paths.matrix.mcool_split_weights_transfered, mapping_df)
-        qc=expand_rows(paths.qc.pore_c, mapping_df)
+        mcoolers_weight_transferred=expand_rows_w_label_types(paths.matrix.mcool_split_weights_transfered, mapping_df),
+        qc=paths.qc.pore_c,
         qc_sister=paths.qc.sister_pore_c
 
 rule qc:
     input:
-        qc=expand_rows(paths.qc.pore_c, mapping_df)
+        qc=paths.qc.pore_c,
         qc_sister=paths.qc.sister_pore_c
 
 rule create_mcoolers_weight_transferred:

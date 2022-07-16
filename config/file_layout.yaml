@@ -72,7 +72,7 @@ binaries:
     f5c_cpu: "f5c_x86_64_linux"
     f5c_gpu: "f5c_x86_64_linux_cuda"
 qc:
-    pore_c: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.pore_c.qc.pdf'
+    pore_c: 'Pore_c.qc.pdf'
     sister_pore_c: 'sister_pore_c.qc.pdf'
 brdu_calling:
     index: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.dnascent.index'
