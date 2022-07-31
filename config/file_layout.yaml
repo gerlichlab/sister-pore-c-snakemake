@@ -1,11 +1,14 @@
 align_table:
     alignment: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.at.alignment.parquet'
     pore_c: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.at.pore_c.parquet'
+    annotated_pore_c: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.at.pore_c.annotated.parquet'
 contacts:
     contacts: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.contacts.parquet'
+    triplet_contacts: '{enzyme}_{run_id}_{batch_id}_{refgenome_id}_{phase_set_id}.triplets.parquet'
 merged_contacts:
     fofn: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.fofn.txt'
     contacts: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.contacts.parquet'
+    triplet_contacts: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.triplets.parquet'
     concatemers: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.concatemers.parquet'
     concatemer_summary: '{enzyme}_{run_id}_{refgenome_id}_{phase_set_id}.concatemer_summary.csv'
 fast5:

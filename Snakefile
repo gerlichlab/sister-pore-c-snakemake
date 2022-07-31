@@ -35,6 +35,7 @@ include: "rules/methylation.smk"  # use f5c to call cpg methylation
 include: "rules/qc_porec.smk" # qc stuff
 include: "rules/brdu_calling.smk"
 include: "rules/brdu_assignment.smk"
+include: "rules/higher_order_contacts.smk"
 include: "rules/generate_coolers_sister_specific.smk"
 include: "rules/qc_sister_porec.smk"
 
@@ -54,6 +55,15 @@ rule qc:
     input:
         qc=paths.qc.pore_c,
         qc_sister=paths.qc.sister_pore_c
+
+## test rules
+
+rule annotated_pore_c:
+    input:
+        annotated=expand_rows(paths.merged_contacts.triplet_contacts, mapping_df)
+
+
+## test rules end
 
 rule create_mcoolers_weight_transferred:
     input:

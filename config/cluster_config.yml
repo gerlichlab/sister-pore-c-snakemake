@@ -48,3 +48,9 @@ zoomify_and_balance_label_coolers:
     memory: 20G
     output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
     error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
+
+merge_triplets:
+    time: 00:30:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 40G

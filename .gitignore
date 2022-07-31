@@ -8,3 +8,5 @@ default.profraw
 .venv
 .tox
 dask-worker-space
+.DS_Store
+.hypothesis

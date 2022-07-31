@@ -9,6 +9,20 @@ rule make_label_library:
         "python bin/make_label_library.py --input {input} --output {output}"
 
 
+rule assign_porec_fragments:
+    input:
+        fragments=paths.align_table.pore_c,
+        label_library=paths.brdu_calling.label_library
+    output:
+        paths.align_table.annotated_pore_c
+    log:
+        to_log(paths.align_table.annotated_pore_c)
+    conda:
+        "../envs/spoc.yml"
+    shell:
+        "spoc annotate {input.fragments} {input.label_library} {output}"
+
+
 rule assign_pairs:
     input:
         contacts=paths.merged_contacts.contacts,
