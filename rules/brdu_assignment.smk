@@ -3,6 +3,8 @@ rule make_label_library:
         expand_basecall_batches(paths.brdu_calling.detect)
     output:
         paths.brdu_calling.label_library
+    log:
+        to_log(paths.brdu_calling.label_library)
     conda:
         PORE_C_CONDA_FILE
     shell:
