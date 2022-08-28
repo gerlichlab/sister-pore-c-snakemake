@@ -183,6 +183,8 @@ def percentage_labelled_reads(label_library_path):
 def plot_fraction_labelled(label_frame, ax):
     sbn.barplot(x="sample", y="Label fraction", data=label_frame, ax=ax, color="tab:blue")
     ax.set(title="Fraction labelled")
+    plt.sca(ax)
+    plt.xticks(*plt.xticks(), rotation=90)
     sbn.despine()
 
 def count_contacts(pairs_path):
@@ -197,6 +199,8 @@ def count_contacts(pairs_path):
 def plot_contact_distribution(count_frame_molten, ax):
     sbn.barplot(x="sample", y="read_number", hue="contact_type", data=count_frame_molten, ax=ax, hue_order=["all", "usable_all_reads", "cis_all_reads", "trans_all_reads", "usable_labelled", "cis_labelled", "trans_labelled"])
     ax.set(title="Contact distribution")
+    plt.sca(ax)
+    plt.xticks(*plt.xticks(), rotation=90)
     sbn.despine()
 
 # prepare data
@@ -229,35 +233,27 @@ label_frame = pd.DataFrame(label_perc, index=["Label fraction"]).T.reset_index()
 
 pairs_mapping = {}
 
-for p in args.all_pairs_paths:
-    run_id = Path(p).name.split("_")[1]
-    pairs_mapping[run_id] = {
-        "all": p
-    }
+pairs_arguments = {
+    "all": args.all_pairs_paths,
+    "usable_all_reads": args.all_reads_cis_trans,
+    "cis_all_reads": args.all_reads_cis,
+    "trans_all_reads": args.all_reads_trans,
+    "usable_labelled": args.labelled_cis_trans,
+    "cis_labelled": args.labelled_cis,
+    "trans_labelled": args.labelled_trans
+}
 
-for p in args.all_reads_cis_trans:
-    run_id = Path(p).name.split("_")[1]
-    pairs_mapping[run_id]["usable_all_reads"] = p
+for name, pairs_list in pairs_arguments.items():
+    for p in pairs_list:
+        run_id = Path(p).name.split("_")[1]
+        if run_id in pairs_mapping:
+            pairs_mapping[run_id][name] = p
+        else:
+            pairs_mapping[run_id] = {
+                name: p
+            }
 
-for p in args.all_reads_cis:
-    run_id = Path(p).name.split("_")[1]
-    pairs_mapping[run_id]["cis_all_reads"] = p
-
-for p in args.all_reads_trans:
-    run_id = Path(p).name.split("_")[1]
-    pairs_mapping[run_id]["trans_all_reads"] = p
-
-for p in args.labelled_cis_trans:
-    run_id = Path(p).name.split("_")[1]
-    pairs_mapping[run_id]["usable_labelled"] = p
-
-for p in args.labelled_cis:
-    run_id = Path(p).name.split("_")[1]
-    pairs_mapping[run_id]["cis_labelled"] = p
-
-for p in args.labelled_trans:
-    run_id = Path(p).name.split("_")[1]
-    pairs_mapping[run_id]["trans_labelled"] = p
+# count reads
 
 read_count = {
     sample: {
@@ -297,4 +293,4 @@ plot_contact_distribution(count_frame_molten, fig.add_subplot(gs[2, 3:]))
 sbn.despine()
 
 
-fig.savefig(args.output)
+fig.savefig(args.output, bbox_inches="tight", pad_inches=0.5)
