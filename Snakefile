@@ -56,15 +56,6 @@ rule qc:
         qc=paths.qc.pore_c,
         qc_sister=paths.qc.sister_pore_c
 
-## test rules
-
-rule annotated_pore_c:
-    input:
-        annotated=expand_rows(paths.merged_contacts.triplet_contacts, mapping_df)
-
-
-## test rules end
-
 rule create_mcoolers_weight_transferred:
     input:
         mcoolers_weight_transferred=expand_rows_w_label_types(paths.matrix.mcool_split_weights_transfered, mapping_df)
