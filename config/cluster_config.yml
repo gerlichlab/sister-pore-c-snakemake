@@ -1,53 +1,45 @@
 # cluster_config.yml - cluster configuration
 __default__:
-    time: 02:00:00 # time limit for each job
+    time: 03:30:00 # time limit for each job
     nodes: 4
     ntasks-per-node: 1 #Request n cores be allocated per node.
-    memory: 25G
-    chdir: /groups/gerlich/experiments/Experiments_005400/005484/sequencing_analysis/sister-pore-c-snakemake
-    output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
-    error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
+    memory: 50G
 
 align_bwa:
     time: 04:00:00
     nodes: 8
     ntasks-per-node: 1
     memory: 55G
-    chdir: /groups/gerlich/experiments/Experiments_005400/005484/sequencing_analysis/sister-pore-c-snakemake
-    output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
-    error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
 
 call_brdu:
-    time: 02:30:00
+    time: 03:30:00
     nodes: 20
     ntasks-per-node: 1
     memory: 15G
-    output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
-    error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
 
 assign_pairs:
     time: 00:30:00
     nodes: 1
     ntasks-per-node: 1
-    memory: 35G
-    output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
-    error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
+    memory: 60G
 
 split_pairs:
     time: 00:30:00
     nodes: 1
     ntasks-per-node: 1
-    memory: 35G
-    output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
-    error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
+    memory: 45G
 
 zoomify_and_balance_label_coolers:
     time: 00:30:00
     nodes: 10
     ntasks-per-node: 1
     memory: 20G
-    output: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.out
-    error: /groups/gerlich/experiments/Experiments_005400/005484/clusterlog/snakemake_job-%j.err
+
+summarise_contacts:
+    time: 02:30:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 25G
 
 merge_triplets:
     time: 00:30:00
