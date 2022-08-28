@@ -7,6 +7,8 @@ rule generate_brdu_index:
         fast5=paths.fast5.fast5,
         seq_summary=paths.fast5.seq_summary
     container: "docker://gerlichlab/dnascent-docker:latest"
+    log:
+        to_log(paths.brdu_calling.index)
     shell:
         "/dnascent/DNAscent/bin/DNAscent index -f {input.fast5} -s {input.seq_summary} -o {output}"
 
