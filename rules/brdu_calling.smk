@@ -1,5 +1,3 @@
-#container: "docker://gerlichlab/dnascent-docker:latest"
-
 rule generate_brdu_index:
     output:
         paths.brdu_calling.index
