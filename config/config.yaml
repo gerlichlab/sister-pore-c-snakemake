@@ -5,7 +5,7 @@ references: "config/references.tsv"
 phased_vcfs: "config/phased_vcfs.tsv"
 file_layout: "config/file_layout.yaml"
 
-output_dir: "/groups/gerlich/experiments/Experiments_005400/005484/sequencing_results"
+output_dir: "../sequencing_results"
 chrom_sizes: "assets/hg19.chrom.sizes"
 
 # a run will be split into batches of this size at the start of a pipeline in order
