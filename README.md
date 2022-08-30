@@ -117,6 +117,12 @@ wget command on the cluster:
 cd /groups/ngs
 wget -c --no-check-certificate --auth-no-challenge --user NAME.SURNAME --ask-password LINK_THAT_YOU_FIND_IN_FORSKALLE
 ```
+or preferable ask ngs facility for the full command with checksum, it should look like this:
+```
+wget -c --no-check-certificate --auth-no-challenge --user NAME.SURNAME --ask-password https://ngs.vbcf.ac.at/filemanager/byurl/a9c5298_20220802_1117_2A_PAK48337_ee3198ee.tar
+md5sum -c <(echo "e81a8822fdf8803d63af88ad5cdd7ee1  a9c5298_20220802_1117_2A_PAK48337_ee3198ee.tar") 
+```
+
 Create in your experiment folder the following folders:
 ```
 mkdir sequencing_data
