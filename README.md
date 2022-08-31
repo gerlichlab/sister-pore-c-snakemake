@@ -7,7 +7,7 @@ This repository contains an adaption of the [Pore-C preprocessing pipeline](http
 To install the sister-pore-c pipeline, you only need to clone this repository using:
 
 ```
-git clone https://github.com/nanoporetech/Pore-C-Snakemake.git
+git clone https://github.com/gerlichlab/sister-pore-c-snakemake.git
 ```
 
 To create the conda environment for running the pipeline, change into the directory of it and run:
@@ -130,7 +130,7 @@ mkdir sequencing_results
 ```
 Pull this repository into your experiment folder:
 ```
-git clone https://github.com/nanoporetech/Pore-C-Snakemake.git
+git clone https://github.com/gerlichlab/sister-pore-c-snakemake.git
 ```
 Your experiment folder should now look like this:
 ```
