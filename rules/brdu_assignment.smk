@@ -41,7 +41,7 @@ rule split_pairs:
     input:
         paths.pairs.assigned_pairs
     output:
-        expand(paths.pairs.label_split, label_type=["labelled_only", "all_reads"], contact_type=["cis", "trans", "cis_and_trans"], allow_missing=True)
+        expand(paths.pairs.label_split, label_type=["labelled_only", "all_reads", "mq_heuristic", "no_unlabelled_c"], contact_type=["cis", "trans", "cis_and_trans"], allow_missing=True)
     conda:
         "../envs/assign_pairs.yml"
     shell:
