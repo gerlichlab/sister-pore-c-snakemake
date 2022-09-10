@@ -75,8 +75,8 @@ def build_alignment_index(detect_path, prob_cutoff=0.8, brdu_cutoff=0.1, limit=N
 
 parser = argparse.ArgumentParser(description='Create label library containing mapping between read_id and labeling state')
 parser.add_argument('--input', nargs="+")
-parser.add_argument('--prob_cutoff', default=0.8)
-parser.add_argument('--brdu_cutoff', default=0.1)
+parser.add_argument('--prob_cutoff', default=0.8, type=float)
+parser.add_argument('--brdu_cutoff', default=0.1, type=float)
 parser.add_argument('--output')
 args = parser.parse_args()
 
