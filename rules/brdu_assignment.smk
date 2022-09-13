@@ -7,8 +7,10 @@ rule make_label_library:
         to_log(paths.brdu_calling.label_library)
     conda:
         PORE_C_CONDA_FILE
+    params:
+        threshold=0.5
     shell:
-        "python bin/make_label_library.py --input {input} --output {output}"
+        "python bin/make_label_library.py --input {input} --output {output} --prob_cutoff {params.threshold}"
 
 
 rule assign_porec_fragments:
