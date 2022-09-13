@@ -21,13 +21,13 @@ assign_pairs:
     time: 00:30:00
     nodes: 1
     ntasks-per-node: 1
-    memory: 60G
+    memory: 120G
 
 split_pairs:
-    time: 00:30:00
+    time: 02:30:00
     nodes: 1
     ntasks-per-node: 1
-    memory: 45G
+    memory: 90G
 
 zoomify_and_balance_label_coolers:
     time: 00:30:00
@@ -36,7 +36,7 @@ zoomify_and_balance_label_coolers:
     memory: 20G
 
 summarise_contacts:
-    time: 02:30:00
+    time: 06:30:00
     nodes: 1
     ntasks-per-node: 1
     memory: 25G
