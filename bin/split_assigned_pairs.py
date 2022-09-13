@@ -87,7 +87,7 @@ write_pairs(header, trans_pairs, base_name + "labelled_only.trans.pairs.gz")
 
 # generate all output
 
-all_pairs, cis_pairs, trans_paris = split_pairs(pairs)
+all_pairs, cis_pairs, trans_pairs = split_pairs(pairs)
 
 write_pairs(header, all_pairs, base_name + "all_reads.cis_and_trans.pairs.gz")
 write_pairs(header, cis_pairs, base_name + "all_reads.cis.pairs.gz")
@@ -98,9 +98,9 @@ write_pairs(header, trans_pairs, base_name + "all_reads.trans.pairs.gz")
 all_wo_unlabelled, cis_wo_unlabelled, trans_wo_unlabelled = split_pairs(
     pairs.loc[~(~pairs.label_1 & ~pairs.label_2), :]
 )
-write_pairs(header, all_wo_unlabelled, base_name + "no_unlabelled_c.cis.pairs.gz")
+write_pairs(header, all_wo_unlabelled, base_name + "no_unlabelled_c.cis_and_trans.pairs.gz")
 write_pairs(
-    header, cis_wo_unlabelled, base_name + "no_unlabelled_c.cis_and_trans.pairs.gz"
+    header, cis_wo_unlabelled, base_name + "no_unlabelled_c.cis.pairs.gz"
 )
 write_pairs(header, trans_wo_unlabelled, base_name + "no_unlabelled_c.trans.pairs.gz")
 
@@ -114,5 +114,5 @@ all_pairs_mq, cis_mq, trans_mq = split_pairs(
     ]
 )
 write_pairs(header, all_pairs_mq, base_name + "mq_heuristic.cis_and_trans.pairs.gz")
-write_pairs(header, cis_mq, base_name + "mq_heuristic.cis_and_trans.pairs.gz")
+write_pairs(header, cis_mq, base_name + "mq_heuristic.cis.pairs.gz")
 write_pairs(header, trans_mq, base_name + "mq_heuristic.trans.pairs.gz")
