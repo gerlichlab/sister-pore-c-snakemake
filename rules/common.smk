@@ -87,7 +87,7 @@ def expand_rows(path: str, df: pd.DataFrame):
 
 def expand_rows_w_label_types(path: str, df: pd.DataFrame, label_type=None, contact_type=None):
     if label_type is None:
-        label_type = ["labelled_only", "all_reads"]
+        label_type = ["labelled_only", "all_reads","mq_heuristic", "no_unlabelled_c"]
     if contact_type is None:
         contact_type = ["cis", "trans", "cis_and_trans"]
     expanded = expand(path, label_type=label_type, contact_type=contact_type, allow_missing=True)
