@@ -3,8 +3,8 @@
 
 rule align_bwa:
     output:
-        bam=paths.mapping.coord_sorted_bam,
-        bai=paths.mapping.coord_sorted_bai,
+        bam=temp(paths.mapping.coord_sorted_bam),
+        bai=temp(paths.mapping.coord_sorted_bai),
     input:
         fastq=paths.basecall.fastq,
         refgenome=paths.refgenome.fasta,
@@ -172,8 +172,8 @@ rule summarise_contacts:
         pq=paths.merged_contacts.concatemers,
         csv=paths.merged_contacts.concatemer_summary,
     input:
-        contacts=paths.merged_contacts.contacts,
-        read_summary=paths.basecall.summary,
+        contacts=ancient(paths.merged_contacts.contacts),
+        read_summary=ancient(paths.basecall.summary),
     params:
         metadata=lookup_json(["run_id", "enzyme", "biospecimen", "refgenome_id", "phase_set_id"], mapping_df),
     log:
