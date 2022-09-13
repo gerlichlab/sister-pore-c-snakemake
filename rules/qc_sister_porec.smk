@@ -10,7 +10,13 @@ rule create_qc_sister_pore_c:
         all_reads_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["all_reads"], contact_type=["trans"]),
         labelled_cis_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["labelled_only"], contact_type=["cis_and_trans"]),
         labelled_cis=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["labelled_only"], contact_type=["cis"]),
-        labelled_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["labelled_only"], contact_type=["trans"])
+        labelled_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["labelled_only"], contact_type=["trans"]),
+        no_c_cis_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["no_unlabelled_c"], contact_type=["cis_and_trans"]),
+        no_c_cis=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["no_unlabelled_c"], contact_type=["cis"]),
+        no_c_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["no_unlabelled_c"], contact_type=["trans"]),
+        mq_cis_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["mq_heuristic"], contact_type=["cis_and_trans"]),
+        mq_cis=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["mq_heuristic"], contact_type=["cis"]),
+        mq_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["mq_heuristic"], contact_type=["trans"])
     conda:
         "../envs/qc.yml"
     shell:
@@ -23,5 +29,11 @@ rule create_qc_sister_pore_c:
                                                    --labelled_cis_trans {input.labelled_cis_trans} \
                                                    --labelled_cis {input.labelled_cis} \
                                                    --labelled_trans {input.labelled_trans} \
+                                                   --no_c_cis_trans {input.no_c_cis_trans} \
+                                                   --no_c_cis {input.no_c_cis} \
+                                                   --no_c_trans {input.no_c_trans} \
+                                                   --mq_cis_trans {input.mq_cis_trans} \
+                                                   --mq_cis {input.mq_cis} \
+                                                   --mq_trans {input.mq_trans} \
                                                    --output {output}
         """
