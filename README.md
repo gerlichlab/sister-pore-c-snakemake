@@ -153,7 +153,7 @@ tmux new -s SESSION_NAME
 ```
 Activate the environment (you will find above how to create it) and run the script:
 ```
-conda activate pore_c_snakemake
+conda activate pore-c-snakemake
 ./submit_snakemake_job.sh
 ```
 
