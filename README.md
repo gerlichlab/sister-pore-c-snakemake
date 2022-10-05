@@ -61,7 +61,7 @@ Note that the id of the reference genome needs to correspond to the id used in `
 To run the pipeline, active the `pore_c_snakemake` environment (see above) and run the submission script (`submit_snakemake_job.sh`):
 
 ```
-conda activate pore_c_snakemake
+conda activate pore-c-snakemake
 ./submit_snakemake_job.sh
 ```
 
