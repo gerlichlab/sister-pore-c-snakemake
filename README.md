@@ -19,7 +19,7 @@ conda env create
 To activate it, run
 
 ```
-conda activate pore_c_snakemake
+conda activate pore-c-snakemake
 ```
 
 
