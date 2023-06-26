@@ -10,8 +10,7 @@ checkpoint import_basecalls:
         to_log(paths.basecall.catalog),
     benchmark:
         to_benchmark(paths.basecall.catalog)
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     threads: 1
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "

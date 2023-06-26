@@ -13,8 +13,7 @@ rule add_refgenome:
     benchmark:
         to_benchmark(paths.refgenome.catalog)
     threads: 5
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "refgenome prepare {params.fasta} {params.prefix} --genome-id {wildcards.refgenome_id} 2> {log}"
@@ -34,8 +33,7 @@ rule virtual_digest:
     log:
         to_log(paths.virtual_digest.catalog),
     threads: 10
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "refgenome virtual-digest {input} {wildcards.enzyme} {params.prefix} -n {threads} 2> {log}"
