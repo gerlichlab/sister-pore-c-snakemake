@@ -10,7 +10,7 @@ checkpoint import_basecalls:
         to_log(paths.basecall.catalog),
     benchmark:
         to_benchmark(paths.basecall.catalog)
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     threads: 1
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "

@@ -12,7 +12,7 @@ rule to_cooler:
     benchmark:
         to_benchmark(paths.matrix.cool)
     threads: config["software"]["pore_c"]["to_cooler"]["threads"]
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} cooler {params.prefix} --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
@@ -32,7 +32,7 @@ rule to_haplotyped_cooler:
     benchmark:
         to_benchmark(paths.matrix.haplotyped_cools)
     threads: config["software"]["pore_c"]["to_cooler"]["threads"]
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} cooler {params.prefix} --by-haplotype --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
@@ -68,7 +68,7 @@ rule to_unsorted_pairs:
     benchmark:
         to_benchmark(paths.pairs.unsorted_pairs)
     threads: config["software"]["pore_c"]["to_unsorted_pairs"]["threads"]
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} pairs {params.prefix} --chromsizes {input.chromsizes} 2>{log} "
@@ -145,7 +145,7 @@ rule create_hicRef:
         to_log(paths.juicebox.hicref),
     benchmark:
         to_log(paths.juicebox.hicref)
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     threads: 1
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
@@ -181,7 +181,7 @@ rule to_mnd:
     benchmark:
         to_benchmark(paths.juicebox.mnd)
     threads: 1
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} merged_no_dups {params.prefix} --reference-fasta {input.refgenome} 2>{log}"

@@ -14,8 +14,9 @@ rule align_bwa:
         memory=config["software"]["sort"]["memory_per_thread"],
         sort_threads=config["software"]["sort"]["threads"],
     threads: config["software"]["bwa"]["threads"]
-    conda:
-        "../envs/bwa.yml"
+    # conda:
+    #     "../envs/bwa.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     log:
         to_log(paths.mapping.coord_sorted_bam),
     benchmark:
@@ -65,7 +66,7 @@ rule create_alignment_table:
     benchmark:
         to_benchmark(paths.align_table.alignment)
     threads: config["software"]["pore_c"]["create_alignment_table"]["threads"]
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "alignments create-table {input.bam} {output.pq} --alignment-haplotypes {input.alignment_haplotypes} 2>{log}"
@@ -82,7 +83,7 @@ rule assign_fragments:
     benchmark:
         to_benchmark(paths.align_table.pore_c)
     threads: config["software"]["pore_c"]["create_alignment_table"]["threads"]
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "alignments assign-fragments {input.align_table} {input.fragments_table} {output} 2>{log}"
@@ -109,7 +110,7 @@ rule to_contacts:
         to_log(paths.contacts.contacts),
     benchmark:
         to_benchmark(paths.contacts.contacts)
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     threads: 1
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
@@ -156,7 +157,7 @@ rule merge_contact_files:
     benchmark:
         to_benchmark(paths.merged_contacts.contacts)
     threads: 4
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "contacts merge {input} {output} --fofn"
@@ -176,7 +177,7 @@ rule summarise_contacts:
     benchmark:
         to_benchmark(paths.merged_contacts.concatemers)
     threads: 10
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "contacts summarize {input.contacts} {input.read_summary} {output.pq} {output.csv} "
