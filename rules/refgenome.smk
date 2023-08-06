@@ -46,7 +46,7 @@ rule bwa_index_refgenome:
         paths.refgenome.bwt,
     # conda:
     #     "../envs/bwa.yml"
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:bwa"
     log:
         to_log(paths.refgenome.bwt),
     benchmark:

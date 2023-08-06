@@ -16,7 +16,7 @@ rule align_bwa:
     threads: config["software"]["bwa"]["threads"]
     # conda:
     #     "../envs/bwa.yml"
-    container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    container: "docker://gerlichlab/sister-pore-c-docker:bwa"
     log:
         to_log(paths.mapping.coord_sorted_bam),
     benchmark:
