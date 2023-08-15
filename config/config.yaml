@@ -11,7 +11,7 @@ chrom_sizes: "assets/hg19.chrom.sizes"
 # a run will be split into batches of this size at the start of a pipeline in order
 # to permit parallel execution. Warning - if this is set too low then snakemake can
 # start to become sluggish.
-reads_per_batch: 50000
+reads_per_batch: 5000
 # reads longer than this are filtered out (they can cause bwa-sw to crash)
 max_read_length: 100000
 
