@@ -64,24 +64,8 @@ Contains the time, cores and memory requested for the different jobs. It is set 
 
 To run the pipeline, active the `pore_c_snakemake` environment (see above) and run the submission script (`submit_snakemake_job.sh`):
 
-```
-conda activate pore-c-snakemake
-./submit_snakemake_job.sh
-```
-
-This will start the pipeline in the current terminal process. If you want to be able to run the pipeline in the background and come back to inspect its outputs, I recommend using a terminal multiplexer such as [tmux](https://github.com/tmux/tmux/wiki). This allows you to switch quickly between different processes and detach from them. The snakemake process that orchestrates the pipeline is not resource-heavy and can (usually) be run on the login node of HPC clusters. To start a tmux session, run
-
-```
-tmux new -s {SESSION_NAME}
-```
-If you want to detach again, hits CTRL-b d
-
-and to reattach run
-
-```
-tmux a -t {SESSION_NAME}
-```
-**Attention: Currently, there seems to be an issue when entering into tmux with an activated conda environment. Snakemake will have issues switching environments for the individual steps. Deactivate conda before entering the tmux session. Once inside, reactivate it.**
+This will start snakemake with the `nohub` command (this allows you to log out and keep snakemake running in the background) and pipes the outputs to `sisterporec_$DATE.log`. It will keep displaying the progress of the log file. You can press Ctrl-c to stop the displaying, this will not stop snakemake, it will keep running in the background. To stop snakemake you will need to use htop. If you want to resume the live viewing, you can use the command:
+`tail -n 1000 -f MOST_RECENT_LOGFILE`
 
 ## Analysis steps
 
