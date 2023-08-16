@@ -27,8 +27,7 @@ rule filter_bam:
         to_benchmark(paths.mapping.filtered_bam)
     log:
         to_log(paths.mapping.filtered_bam),
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         "( pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         "alignments filter-bam {input.bam} {input.pore_c_table} {output.filtered_bam} "

@@ -5,8 +5,7 @@ rule to_label_coolers:
         pairs=paths.pairs.label_split,
     params:
         chromsizes=config['chrom_sizes']
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         "cooler cload pairs {params.chromsizes}:1000 {input.pairs} {output} --chrom1 2 --chrom2 4 --pos1 3 --pos2 5 "
 
@@ -17,8 +16,7 @@ rule zoomify_and_balance_label_coolers:
         paths.matrix.mcool_label_split,
     params:
         resolutions=",".join(map(str, config["matrix_resolutions"]["zoomify"])),
-    conda:
-        "../envs/cooler.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     threads: 10
     shell:
         "cooler zoomify -n {threads} -r {params.resolutions} -o {output} {input} --balance"
@@ -34,8 +32,7 @@ rule transfer_weights:
         trans=expand(paths.matrix.mcool_split_weights_transfered, contact_type=["trans"], allow_missing=True)
     params:
         resolutions=",".join(map(str, config["matrix_resolutions"]["zoomify"])),
-    conda:
-        "../envs/cooler.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         """
         python bin/transfer_weights.py --input_cis_and_trans {input.cis_and_trans}\

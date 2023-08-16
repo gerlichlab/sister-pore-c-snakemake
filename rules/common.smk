@@ -8,14 +8,6 @@ WRAPPER_PREFIX = f"file:{workflow.basedir}/wrappers"
 OUTDIR = Path(config["output_dir"])
 
 
-if config["pore_c_version"] == "rel":
-    PORE_C_CONDA_FILE = "../envs/pore_c.yml"
-else:
-    # run using the version of pore-c in the submodule
-    assert config["pore_c_version"] == "dev"
-    PORE_C_CONDA_FILE = ""  # ../envs/pore_c_dev.yml"
-
-
 def create_config_dataframes():
     # one row per reference genome
     reference_df = pd.read_table(config["references"], comment="#").set_index(["refgenome_id"], drop=False)

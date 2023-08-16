@@ -1,7 +1,0 @@
-channels:
-    - conda-forge
-    - bioconda
-dependencies:
-    - pairtools==0.3.0
-    - coreutils
-    - tabix

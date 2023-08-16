@@ -12,8 +12,7 @@ rule to_cooler:
     benchmark:
         to_benchmark(paths.matrix.cool)
     threads: config["software"]["pore_c"]["to_cooler"]["threads"]
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} cooler {params.prefix} --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
@@ -33,8 +32,7 @@ rule to_haplotyped_cooler:
     benchmark:
         to_benchmark(paths.matrix.haplotyped_cools)
     threads: config["software"]["pore_c"]["to_cooler"]["threads"]
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} cooler {params.prefix} --by-haplotype --fragment-table {input.fragments} --chromsizes {input.chromsizes} 2>{log} "
@@ -51,8 +49,7 @@ rule create_mcool_file:
         to_benchmark(paths.matrix.mcool)
     log:
         to_log(paths.matrix.mcool),
-    conda:
-        "../envs/cooler.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     threads: 1
     shell:
         "cooler zoomify -n {threads} -r {params.resolutions} -o {output} {input} 2>{log}"
@@ -71,8 +68,7 @@ rule to_unsorted_pairs:
     benchmark:
         to_benchmark(paths.pairs.unsorted_pairs)
     threads: config["software"]["pore_c"]["to_unsorted_pairs"]["threads"]
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} pairs {params.prefix} --chromsizes {input.chromsizes} 2>{log} "
@@ -90,8 +86,7 @@ rule to_sorted_pairs:
     benchmark:
         to_benchmark(paths.pairs.pairs)
     threads: config["software"]["pore_c"]["sort_pairs_file"]["threads"]
-    conda:
-        "../envs/pairtools.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         "(pairtools sort {input} --nproc {threads} > {params.uncomp_file} &&  bgzip {params.uncomp_file} -) 2>{log}"
 
@@ -105,8 +100,7 @@ rule index_pairs:
         to_log(paths.pairs.index),
     benchmark:
         to_benchmark(paths.pairs.index)
-    conda:
-        "../envs/pairix.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         "pairix {input} 2>{log}"
 
@@ -123,8 +117,7 @@ rule to_salsa_bed:
     benchmark:
         to_benchmark(paths.assembly.salsa_bed)
     threads: config["software"]["pore_c"]["to_salsa_bed"]["threads"]
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} salsa_bed {params.prefix}  2>{log}"
@@ -152,8 +145,7 @@ rule create_hicRef:
         to_log(paths.juicebox.hicref),
     benchmark:
         to_log(paths.juicebox.hicref)
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     threads: 1
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
@@ -189,8 +181,7 @@ rule to_mnd:
     benchmark:
         to_benchmark(paths.juicebox.mnd)
     threads: 1
-    conda:
-        PORE_C_CONDA_FILE
+    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     shell:
         "pore_c {DASK_SETTINGS} --dask-num-workers {threads} "
         " contacts export {input.contacts} merged_no_dups {params.prefix} --reference-fasta {input.refgenome} 2>{log}"

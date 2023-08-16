@@ -17,8 +17,7 @@ rule create_qc_sister_pore_c:
         mq_cis_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["mq_heuristic"], contact_type=["cis_and_trans"]),
         mq_cis=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["mq_heuristic"], contact_type=["cis"]),
         mq_trans=expand_rows_w_label_types(paths.pairs.label_split, mapping_df, label_type=["mq_heuristic"], contact_type=["trans"])
-    conda:
-        "../envs/qc.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         """python bin/create_sister_pore_c_report.py --detect_paths {input.detect} \
                                                    --label_library_paths {input.label_library} \

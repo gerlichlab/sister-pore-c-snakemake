@@ -6,7 +6,6 @@ rule create_qc_pore_c:
         pq=expand_rows(paths.merged_contacts.contacts, mapping_df)
     log:
         to_log(paths.qc.pore_c)
-    conda:
-        "../envs/qc.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     shell:
         "python bin/create_pore_c_qc_plots.py --concatamer_tables {input.pq} --concatamer_summaries {input.csv} --output {output}"
