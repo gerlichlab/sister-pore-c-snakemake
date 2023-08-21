@@ -10,3 +10,6 @@ default.profraw
 dask-worker-space
 .DS_Store
 .hypothesis
+*.log
+*.out
+*.cache

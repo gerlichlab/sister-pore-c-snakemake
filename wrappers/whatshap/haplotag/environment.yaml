@@ -1,7 +1,10 @@
 channels:
-    - bioconda
+#     - bioconda
     - conda-forge
-    - defaults
+#     - defaults
 dependencies:
-    - whatshap ==1.0
-    - samtools ==1.10.0
+#     - whatshap ==1.0
+#     - samtools ==1.10.0
+# This is environment is not needed since dependencies are already in container.
+# Since snakemake needs an environment.yaml that is not empty simply adding python does the trick.
+    - python
