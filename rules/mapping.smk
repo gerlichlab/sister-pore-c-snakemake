@@ -51,6 +51,7 @@ rule haplotag:
         to_log(paths.mapping.haplotagged_aligns),
     benchmark:
         to_benchmark(paths.mapping.haplotagged_aligns)
+    container: "docker://gerlichlab/sister-pore-c-docker:latest"
     wrapper:
         WRAPPER_PREFIX + "/whatshap/haplotag"
 
