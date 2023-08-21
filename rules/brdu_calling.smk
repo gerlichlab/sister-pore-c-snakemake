@@ -20,4 +20,4 @@ rule call_brdu:
     container: "docker://gerlichlab/dnascent-docker:latest"
     threads: 20
     shell:
-        "/dnascent/DNAscent/bin/DNAscent detect -b {input.mapping} -r {input.refgenome} -i {input.index} -o {output} -q 20 -l 25 -t {threads} || touch {output}"
+        "/dnascent/DNAscent/bin/DNAscent detect -b {input.mapping} -r {input.refgenome} -i {input.index} -o {output} -q 20 -l 25 -t {threads} || touch {output} && touch {output}.err"

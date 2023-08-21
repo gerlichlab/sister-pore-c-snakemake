@@ -4,6 +4,6 @@ channels:
 - bioconda
 - defaults
 dependencies:
-- pandas ==1.0.5
-- python-box ==4.2.3
+- pandas
+- python-box
 - snakemake
