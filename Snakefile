@@ -49,7 +49,12 @@ rule all:
         contacts=expand_rows(paths.merged_contacts.concatemers, mapping_df),
         mcoolers_weight_transferred=expand_rows_w_label_types(paths.matrix.mcool_split_weights_transfered, mapping_df),
         qc=paths.qc.pore_c,
-        qc_sister=paths.qc.sister_pore_c
+        qc_sister=paths.qc.sister_pore_c,
+        annotated_pore_c=paths.align_table.annotated_pore_c
+
+rule annotated_pore_c:
+    input:
+        annotated=expand_rows(paths.merged_contacts.triplet_contacts, mapping_df)
 
 rule qc:
     input:

@@ -43,7 +43,7 @@ In addition, each row should contain a `run_id`, which specifies the name of a g
 
 ### **config.yaml**
 
-This file contains numerous parameters for parts of the pipeline, most of which need not be changed. It contains the batch size as a parameter, per default set to 10k reads; setting it to low might stall the snakemake solver. The `output_dir` parameter is set per default relative to the current folder at: `../sequencing_results`
+This file contains numerous parameters for parts of the pipeline, most of which need not be changed. It contains the batch size as a parameter, per default set to 10k reads; setting it to low might stall the snakemake solver. The `output_dir` parameter is set per default relative to the current folder at: `../pipeline_results`
 
 ### **references.tsv**
 
@@ -115,7 +115,7 @@ md5sum -c <(echo "e81a8822fdf8803d63af88ad5cdd7ee1  a9c5298_20220802_1117_2A_PAK
 Create in your experiment folder the following folders:
 ```
 mkdir sequencing_data
-mkdir sequencing_results
+mkdir pipeline_results
 ```
 Pull this repository into your experiment folder:
 ```
@@ -125,7 +125,7 @@ Your experiment folder should now look like this:
 ```
 ├──EXPERIMENT_ID
     ├──sequencing_data
-    ├──sequencing_results
+    ├──pipeline_results
     └──sister-pore-c-snakemake 
 ```
 Unzip and copy the data from the ngs folder into the experiment folder, preferably not do this on the login node:
