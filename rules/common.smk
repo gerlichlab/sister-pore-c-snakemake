@@ -62,12 +62,12 @@ def create_path_accessor(prefix: Path = OUTDIR) -> Box:
 
 def to_log(path: str) -> str:
     """Log file location based on output file"""
-    return str("logs/" + path) + ".log"
+    return str(OUTDIR / "logs") + path.removeprefix("../pipeline_results") + ".log"
 
 
 def to_benchmark(path: str) -> str:
     """Log file location based on output file"""
-    return str("benchmarks/" + path) + ".bench.txt"
+    return str(OUTDIR / "benchmarks") + path.removeprefix("../pipeline_results") + ".bench.txt"
 
 
 def to_prefix(path: str, components=2) -> str:
