@@ -35,7 +35,7 @@ To specify the input files, genome assemblies for alignment, and output folder, 
 
 This file contains paths to input files. To run the pipeline, the following files are needed:
 
--  The path to the basecall fastq files
+- The path to the basecall fastq files
 - The path to the fast5 directory
 - The path to the sequencing summary path (mapping of read_ids to fast5 files)
 

@@ -1,6 +1,3 @@
-
-
-
 rule align_bwa:
     output:
         bam=temp(paths.mapping.coord_sorted_bam),

@@ -1,13 +1,10 @@
 from box import Box
 import glob
-# import os
 
 ACTIVATE_POREC = "set +u; source ~/miniconda2/etc/profile.d/conda.sh ; conda activate ; conda activate poreC; "
 
 DASK_SETTINGS = "--dask-scheduler-port 0"
 WRAPPER_PREFIX = f"file:{workflow.basedir}/wrappers"
-# cwd_path = os.getcwd()
-# OUTDIR = Path(cwd_path + '/' + config["output_dir"])
 OUTDIR = Path(config["output_dir"])
 
 
