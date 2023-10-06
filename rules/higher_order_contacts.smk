@@ -5,9 +5,9 @@ rule expand_triplets:
         paths.contacts.triplet_contacts
     log:
         to_log(paths.contacts.triplet_contacts)
-    # container: "docker://gerlichlab/sister-pore-c-docker:latest"
-    conda:
-        "../envs/spoc.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:spoc"
+    # conda:
+    #     "../envs/spoc.yml"
     shell:
         "spoc expand {input.fragments} {output}"
 
@@ -18,8 +18,8 @@ rule merge_triplets:
         directory(paths.merged_contacts.triplet_contacts)
     log:
         to_log(paths.merged_contacts.triplet_contacts)
-    conda:
-        "../envs/spoc.yml"
-    # container: "docker://gerlichlab/sister-pore-c-docker:latest"
+    # conda:
+    #     "../envs/spoc.yml"
+    container: "docker://gerlichlab/sister-pore-c-docker:spoc"
     shell:
         "spoc merge contacts {input} -o {output}"
