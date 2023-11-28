@@ -41,6 +41,12 @@ create_qc_sister_pore_c:
     ntasks-per-node: 1
     memory: 20G
 
+create_alignment_table:
+    time: 00:05:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 1G
+
 import_basecalls:
     time: 02:00:00
     nodes: 1
