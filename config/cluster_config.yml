@@ -17,6 +17,12 @@ assign_pairs:
     ntasks-per-node: 1
     memory: 120G
 
+assign_fragments:
+    time: 00:05:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 10G
+
 align_bwa:
     time: 04:00:00
     nodes: 8
