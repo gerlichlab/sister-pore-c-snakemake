@@ -5,11 +5,17 @@ __default__:
     ntasks-per-node: 1 #Request n cores be allocated per node.
     memory: 50G
 
-create_qc_pore_c:
-    time: 03:30:00 # time limit for each job
+assign_porec_fragments:
+    time: 00:05:00
     nodes: 1
-    ntasks-per-node: 1 #Request n cores be allocated per node.
-    memory: 90G
+    ntasks-per-node: 1
+    memory: 2G
+
+assign_pairs:
+    time: 00:59:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 120G
 
 align_bwa:
     time: 04:00:00
@@ -23,11 +29,53 @@ call_brdu:
     ntasks-per-node: 1
     memory: 15G
 
-assign_pairs:
-    time: 00:59:00
+create_qc_pore_c:
+    time: 03:30:00
     nodes: 1
     ntasks-per-node: 1
-    memory: 120G
+    memory: 90G
+
+create_qc_sister_pore_c:
+    time: 00:30:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 20G
+
+import_basecalls:
+    time: 02:00:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 10G
+
+haplotag:
+    time: 00:05:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 2G 
+
+remove_index_from_readname:
+    time: 00:05:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 2G
+
+to_contacts:
+    time: 00:05:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 2G  
+
+to_label_coolers:
+    time: 00:05:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 5G
+
+transfer_weights:
+    time: 00:05:00
+    nodes: 1
+    ntasks-per-node: 1
+    memory: 1G
 
 split_pairs:
     time: 02:30:00
@@ -37,9 +85,9 @@ split_pairs:
 
 zoomify_and_balance_label_coolers:
     time: 00:30:00
-    nodes: 10
+    nodes: 4
     ntasks-per-node: 1
-    memory: 20G
+    memory: 5G
 
 summarise_contacts:
     time: 06:30:00
@@ -48,7 +96,7 @@ summarise_contacts:
     memory: 25G
 
 merge_triplets:
-    time: 00:30:00
+    time: 00:59:00
     nodes: 1
     ntasks-per-node: 1
     memory: 40G
