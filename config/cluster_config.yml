@@ -6,10 +6,10 @@ __default__:
     memory: 50G
 
 assign_porec_fragments:
-    time: 00:05:00
+    time: 00:25:00
     nodes: 1
     ntasks-per-node: 1
-    memory: 2G
+    memory: 20G
 
 assign_pairs:
     time: 00:59:00
