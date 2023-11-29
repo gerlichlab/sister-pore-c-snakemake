@@ -33,7 +33,7 @@ call_brdu:
     time: 03:30:00
     nodes: 20
     ntasks-per-node: 1
-    memory: 15G
+    memory: 20G
 
 create_qc_pore_c:
     time: 03:30:00
