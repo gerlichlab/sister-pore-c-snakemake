@@ -99,7 +99,7 @@ zoomify_and_balance_label_coolers:
     time: 00:30:00
     nodes: 4
     ntasks-per-node: 1
-    memory: 5G
+    memory: 10G
 
 summarise_contacts:
     time: 06:30:00
