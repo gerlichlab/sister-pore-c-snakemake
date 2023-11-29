@@ -72,10 +72,10 @@ remove_index_from_readname:
     memory: 2G
 
 to_contacts:
-    time: 00:05:00
+    time: 00:10:00
     nodes: 1
     ntasks-per-node: 1
-    memory: 2G  
+    memory: 5G  
 
 to_label_coolers:
     time: 00:05:00
