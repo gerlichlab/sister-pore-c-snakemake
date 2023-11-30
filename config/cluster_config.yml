@@ -78,10 +78,10 @@ to_contacts:
     memory: 5G  
 
 to_label_coolers:
-    time: 00:05:00
+    time: 00:15:00
     nodes: 1
     ntasks-per-node: 1
-    memory: 5G
+    memory: 10G
 
 transfer_weights:
     time: 00:05:00
