@@ -95,10 +95,22 @@ Pore-C allows analysis of higher-order contacts and this pipeline implements the
     ...
     ```
     You most likely have an error in one of the paths of the config/basecalls.tsv, or you are using an editor that replaces tabs with spaces. This will mess with the structure of the .tsv format.
-
-- If you run into out of memory or timeout issues, increase the values for your step in `config\cluster_config.yml`. Be careful not to increase them over the limit of your cluster. Since if slurm can not find the computational resources (e.g. a node with more RAM than currently exists), the job will not fail, but slurm will be stuck waiting for those to appear magically.
-- If your batch size is small and thus the number of snakemake jobs is very large, snakemake solver might get stuck at with the line `Select jobs to execute...`. Interestingly sending a `SIGTERM` via htop to the snakemake process will not terminate it but, wake snakemake up again and it will continue running.
-
+- If you run into out-of-memory or timeout issues, increase the values for your step in `config\cluster_config.yml`. Be careful not to increase them over the limit of your cluster. Since if slurm can not find the computational resources (e.g. a node with more RAM than currently exists), the job will not fail, but slurm will be stuck waiting for those to appear magically.
+- If you see in your `sister-pore-c-snakemake/sisterporec_????.log` something like
+  ```
+  Finished job 68.
+  2 of 6 steps (33%) done
+  ```
+  and you do not have jobs queued anymore for your user (check with `squeue -u FIRSTNAME.LASTNAME`).
+  One of your slurmjobs failed due to using too many resources and was killed without snakemake noticing.
+  Kill the running snakemake via htop using `SIGKILL`.
+  
+  Update the `config\cluster_config.yml` as in the paragraph above.
+  
+  Then, unlock the `sister-pore-c-snakemake` folder with `snakemake --unlock` before you restart the pipeline.
+  
+  Tip: If you can not find which jobs failed, you can simply rerun the pipeline again without changing `config\cluster_config.yml` and the new run should start and fail again at the job that failed before. Now look at the new `sister-pore-c-snakemake/sisterporec_????.log` for the last submitted jobs e.g. `Submitted batch job 63213725` run the command `jobinfo 63213725` it will tell you what rule that job was and why the job failed. Now increase `config\cluster_config.yml` accordingly.
+  
 ## Step-by-step instructions for running the pipeline in the gerlich lab
 Download the data from the facility into the ngs folder using the
 wget command on the cluster:
@@ -121,24 +133,46 @@ Pull this repository into your experiment folder:
 ```
 git clone https://github.com/gerlichlab/sister-pore-c-snakemake.git
 ```
-Your experiment folder should now look like this:
-```
-├──EXPERIMENT_ID
-    ├──sequencing_data
-    ├──pipeline_results
-    └──sister-pore-c-snakemake 
-```
-Unzip and copy the data from the ngs folder into the experiment folder, preferably not do this on the login node:
+To unzip and copy the data from the ngs folder into the experiment folder, preferably not do this on the login node
+create a file called to_unzip.sh that contains a line like this:
 ```
 tar -xzvf /groups/gerlich/ngs/???.tgz -C /groups/gerlich/experiments/Experiments_???/???/sequencing_data/
 ```
-Update `config\basecalls.tsv` to fit your experiment; an example of a multiplexed PromethION flowcell can be found in experiment 005548.
-
-Update the output folder in `config\config.yaml` if you do not want the results in the upstream `sequencing_results` folder we just created.
-
+This will allow us to delete the unzipped data after the pipeline is finished but help us unzip the data if we need to rerun the pipeline again, with the following command
+```
+bash to_unzip.sh
+```
+Create a new `basecall.tsv` to fit your experiment; an example of a multiplexed PromethION flowcell can be found in `config\basecalls.tsv`.
+Copy your basecall.tsv and overwrite the sample one in the config folder of the pipeline by:
+```
+cp basecalls.tsv sister-pore-c-snakemake/config/.
+```
+Last but not least, link the Experiment that either produced this data or were the follow-up analysis is taking place with the following command:
+```
+ln -s ../../experiments/Experiments_00??00/00????/ exp????
+```
+Your experiment folder should now look like this:
+```
+├──EXPERIMENT_ID
+    ├──basecalls.tsv
+    ├──exp????
+    ├──pipeline_results
+    ├──sequencing_data
+    ├──sister-pore-c-snakemake
+    └──to_unzip.sh
+```
+Now run the pipeline; running more than two at a time will not make it faster since you will be limited by the slurm quotas at our institute.
 ```
 conda activate pore-c-snakemake
 ./submit_snakemake_job.sh
 ```
 This will start snakemake with the `nohub` command (this allows you to log out and keep snakemake running in the background) and pipes the outputs to `sisterporec_$DATE.log`. It will keep displaying the progress of the log file. You can press Ctrl-c to stop the displaying, this will not stop snakemake, it will keep running in the background. To stop snakemake you will need to use htop. If you want to resume the live viewing, you can use the command:
 `tail -n 1000 -f MOST_RECENT_LOGFILE`
+
+If you see in the `sister-pore-c-snakemake/sisterporec_????.log` the two final lines:
+```
+? of ? steps (100%) done
+Complete log: .snakemake/log/???.snakemake.log
+```
+you can now delete the content of `sequencing_data`; otherwise, check above for what to do if one of the slurmjob runs out of resources.
+
