@@ -136,9 +136,9 @@ git clone https://github.com/gerlichlab/sister-pore-c-snakemake.git
 To unzip and copy the data from the ngs folder into the experiment folder, preferably not do this on the login node
 create a file called to_unzip.sh that contains a line like this:
 ```
-tar -xzvf /groups/gerlich/ngs/???.tgz -C /groups/gerlich/experiments/Experiments_???/???/sequencing_data/
+tar -xvf /groups/gerlich/ngs/???.tgz -C /groups/gerlich/sequencing_data/???/sequencing_data/
 ```
-This will allow us to delete the unzipped data after the pipeline is finished but help us unzip the data if we need to rerun the pipeline again, with the following command
+This will allow us to delete the unzipped data after the pipeline is finished but help us unzip the data if we need to rerun the pipeline again with the following command:
 ```
 bash to_unzip.sh
 ```
