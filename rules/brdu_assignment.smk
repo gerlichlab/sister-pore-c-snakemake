@@ -5,7 +5,7 @@ rule make_label_library:
         paths.brdu_calling.label_library
     log:
         to_log(paths.brdu_calling.label_library)
-    container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
+    # container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     params:
         threshold=0.5
     shell:
