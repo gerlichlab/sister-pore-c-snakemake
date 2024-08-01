@@ -77,6 +77,8 @@ class Sample():
             temp.loc[:, "read_id"] = read._read_id + read._chrom + str(read._ref_start) + str(read._ref_end) + str(read._strand)
             temp.loc[:, "read_length"] = read.get_length()
             output.append(temp)
+        if len(output) == 0:
+            return pd.DataFrame(columns=["sample_name","read_id", "read_length"])
         return pd.concat(output)
     def __repr__(self):
         return f"<Sample name={self.name}| no. reads={len(self._reads)}"
