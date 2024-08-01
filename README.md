@@ -22,6 +22,15 @@ To activate it, run
 conda activate pore-c-snakemake
 ```
 
+We now use the singularity image provided by DNAscent.
+You might need to do this first to rech the singularity repository.
+```
+singularity remote add SylabsCloud cloud.sycloud.io
+singularity remote use SylabsCloud
+```
+During the steps above you might need to create a Sylabs account and a key.
+Check if you can pull the image with: `singularity pull DNAscent.sif library://mboemo/dnascent/dnascent:4.0.2`
+
 
 ## Config files
 
@@ -110,7 +119,43 @@ Pore-C allows analysis of higher-order contacts and this pipeline implements the
   Then, unlock the `sister-pore-c-snakemake` folder with `snakemake --unlock` before you restart the pipeline.
   
   Tip: If you can not find which jobs failed, you can simply rerun the pipeline again without changing `config\cluster_config.yml` and the new run should start and fail again at the job that failed before. Now look at the new `sister-pore-c-snakemake/sisterporec_????.log` for the last submitted jobs e.g. `Submitted batch job 63213725` run the command `jobinfo 63213725` it will tell you what rule that job was and why the job failed. Now increase `config\cluster_config.yml` accordingly.
-  
+    
+  Tip2: To find a failed job use: `sacct -u USERNAME` a failled job should look like this:
+```
+4185954      snakejob.+          c        dge          1 OUT_OF_ME+    0:125 
+4185954.bat+      batch                   dge          1 OUT_OF_ME+    0:125 
+4185954.ext+     extern                   dge          1 OUT_OF_ME+    0:125 
+```
+then use `jobinfo 4185954` to get more info about what rule needs to be adopted.
+```
+Job ID              : 4185954
+Name                : snakejob.create_qc_sister_pore_c.78.sh
+User                : federico.teloni
+Account             : dge
+Partition           : c
+Nodes               : clip-c2-37
+Number of Nodes     : 1
+Cores               : 1
+Number of Tasks     : 1
+GPUs                : 0
+State               : OUT_OF_MEMORY
+Submit              : 2024-08-01T17:08:15
+ExitCode            : 0:125
+Start               : 2024-08-01T17:10:18
+End                 : 2024-08-01T17:19:22
+Reserved walltime   : 00:30:00
+Used walltime       : 00:09:04
+Used CPU time       : 00:08:44 (efficiency: 96.32%)
+% User (Computation): 88.17%
+% System (I/O)      : 11.83%
+Mem reserved        : 40G
+Max Mem (Node/step) : 40.00G (clip-c2-37, per node)
+Full Max Mem usage  : 40.00G
+Total Disk Read     : 18.24G
+Total Disk Write    : 1.84G
+```
+
+
 ## Step-by-step instructions for running the pipeline in the gerlich lab
 Download the data from the facility into the ngs folder using the
 wget command on the cluster:
