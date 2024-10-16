@@ -88,6 +88,17 @@ Pore-C allows analysis of higher-order contacts and this pipeline implements the
 - Finally, sister identity is annotated using the merged triplet contacts and the label library mentioned above. The final output is a triplet parquet file.
 
 ## Troubleshooting
+- If you get an error like this when trying to run the pipeline:
+ ```
+InputFunctionException in rule import_basecalls in file /groups/gerlich/sequencing_data/155/sister-pore-c-snakemake/rules/reads.smk, line 1:
+Error:
+  KeyError: '319165'
+Wildcards:
+  enzyme=NlaIII
+  run_id=319165
+ ```
+ Please use a run_id that does not contain a pure number! (i.e. add a letter at the beginning a319165)
+ 
  - If you get an error like this when trying to run the pipeline:
     ```
     MissingInputException in line 45 of /groups/gerlich/shared/fede-pore-c/sister-pore-c-snakemake/Snakefile:
