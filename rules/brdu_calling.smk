@@ -21,3 +21,4 @@ rule call_brdu:
     # container: "library://mboemo/dnascent/dnascent:4.0.3"
     threads: 20
     shell:
+        "singularity run library://mboemo/dnascent/dnascent:4.0.2 detect -b {input.mapping} -r {input.refgenome} -i {input.index} -o {output} -q 30 -l 500 -t {threads} || touch {output} && touch {output}.err"
