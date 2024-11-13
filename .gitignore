@@ -16,3 +16,4 @@ dask-worker-space
 .condarc
 .conda/
 .fontconfig/
+*.LOG

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DATE=$(date +"%Y-%m-%d-%H:%M:%S")
+DATE=$(date +"%Y-%m-%d--%H-%M-%S")
 echo "========================================================
 Log of the pipeline run is written to 'sisterporec_$DATE.log' and can be observed in this terminal.
 It will contain a message when finished. This terminal can be closed.
