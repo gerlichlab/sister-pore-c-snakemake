@@ -34,6 +34,20 @@ rule import_fast5s:
         else:
             shell('cp -rs "$(pwd)/{params.fname}" {output}')
 
+rule import_pod5:
+    # Makes symlinks to the pod5 files
+    output:
+        directory(paths.pod5.pod5),
+    params:
+        fname=lookup_value("fast5_directory", basecall_df),
+    run:
+        expand_tilde = os.path.expanduser(params.fname)
+        path_is_absolute = os.path.isabs(expand_tilde)
+        # cp -rs requires an absolute path for the source
+        if path_is_absolute:
+            shell("cp -rs {params.fname} {output}")
+        else:
+            shell('cp -rs "$(pwd)/{params.fname}" {output}')
 
 rule import_sequencing_summary:
     output:
