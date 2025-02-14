@@ -131,9 +131,10 @@ def read_detect_file(detect_path, limit):
             )
         else:
             posOnRef = int(splitLine[0])
-            probBrdU = float(splitLine[1])
-            sixMerOnRef = splitLine[2]
-            current_read.add_thymidine(posOnRef, probBrdU)
+            probBrdU = float(splitLine[2])
+            probEdU = float(splitLine[1])
+            sixMerOnRef = splitLine[3]
+            current_read.add_thymidine(posOnRef, probBrdU) # Need to modify the code to switch BrdU and EdU
             #add these values to a container or do some processing here
 
     f.close()

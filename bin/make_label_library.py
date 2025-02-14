@@ -12,9 +12,9 @@ class BrdURead:
         self._strand = strand
         self._thymidines = []
 
-    def add_thymidine(self, position_on_ref, probability):
+    def add_thymidine(self, position_on_ref, probBrdU, probEdU):
         self._thymidines.append(
-            {"chrom": self._chrom, "pos": position_on_ref, "prob_brdu": probability}
+            {"chrom": self._chrom, "pos": position_on_ref, "prob_brdu": probBrdU, "prob_edu": probEdU}
         )
 
     def get_id(self):
@@ -70,9 +70,10 @@ def build_alignment_index(detect_path, prob_cutoff=0.8, brdu_cutoff=0.1, limit=N
             current_read = BrdURead(readID, chromosome, refStart, refEnd, strand)
         else:
             posOnRef = int(splitLine[0])
-            probBrdU = float(splitLine[1])
-            sixMerOnRef = splitLine[2]
-            current_read.add_thymidine(posOnRef, probBrdU)
+            probBrdU = float(splitLine[2])
+            probEdU = float(splitLine[1])
+            sixMerOnRef = splitLine[3]
+            current_read.add_thymidine(posOnRef, probBrdU, probEdU) # Need to modify the code to switch BrdU and EdU
             # add these values to a container or do some processing here
     f.close()
     return alignment_index

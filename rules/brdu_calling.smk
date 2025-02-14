@@ -7,7 +7,7 @@ rule generate_brdu_index:
     log:
         to_log(paths.brdu_calling.index)
     shell:
-        "/groups/gerlich/shared/TH_shared/pipeline_test/DNAscent/bin/DNAscent index -f {input.pod5} -o {output}"
+        "/groups/gerlich/sequencing_data/159/DNAscent/bin/DNAscent index -f {input.pod5} -o {output}"
         #TODO: rename fast5 to pod5
 
 rule call_brdu:
@@ -20,4 +20,4 @@ rule call_brdu:
     # container: "library://mboemo/dnascent/dnascent:4.0.3"
     threads: 20
     shell:
-        "/groups/gerlich/shared/TH_shared/pipeline_test/DNAscent/bin/DNAscent detect -b {input.mapping} -r {input.refgenome} -i {input.index} -o {output} -q 30 -l 500 -t {threads} || touch {output} && touch {output}.err"
+        "/groups/gerlich/sequencing_data/159/DNAscent/bin/DNAscent detect -b {input.mapping} -r {input.refgenome} -i {input.index} -o {output} -q 10 -l 200 -t {threads} || touch {output} && touch {output}.err"

@@ -7,9 +7,10 @@ rule make_label_library:
         to_log(paths.brdu_calling.label_library)
     # container: "docker://gerlichlab/sister-pore-c-docker:pore-c"
     params:
-        threshold=0.5
+        threshold_prob=0.5,
+        threshold_brdu=0.1
     shell:
-        "python bin/make_label_library.py --input {input} --output {output} --prob_cutoff {params.threshold}"
+        "python bin/make_label_library.py --input {input} --output {output} --prob_cutoff {params.threshold_prob} --brdu_cutoff {params.threshold_brdu}"
 
 
 rule assign_porec_fragments:
